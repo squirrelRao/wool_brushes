@@ -10,8 +10,8 @@ from net_client import NetClient
 class GetPreSale:
 
     def __init__(self,bsc_key):
-	self.provider = 'https://data-seed-prebsc-1-s1.binance.org:8545'
-	self.bsc_api_key = bsc_key
+        self.provider = 'https://data-seed-prebsc-1-s1.binance.org:8545'
+        self.bsc_api_key = bsc_key
         self.bsc_api_key = '14QZBS4UY6VJ5G1J9MT4RCP9KG8YGFBCX9'
         self.contract_address = ''
         self.abi = ''
@@ -19,11 +19,15 @@ class GetPreSale:
     def get_contract_abi(self,address):
         self.contract_address = address
         url = "https://api-testnet.bscscan.com/api?module=contract&action=getabi&address="+address+"&apikey="+self.bsc_api_key
-        print(url)
         net_client = NetClient()
-        res = net_client.get(url)
-        self.abi = res["result"]
-        return self.abi
+        headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36"}
+        res = net_client.get(url,headers)
+        if res["status"] == "1":
+            self.abi = res["result"]
+            return self.abi
+        else:
+            print(res["result"])
+            return None
 
     def get(self,url,headers={},res_type="json"):
         self.session = requests.Session()
@@ -53,8 +57,10 @@ class GetPreSale:
 
 
 def main():
-    a = GetPreSale("14QZBS4UY6VJ5G1J9MT4RCP9KG8YGFBCX9")
-    abi = a.get_contract_abi("0xADFb5176A09D894BeeB952e8E258272BDCdb8590")
+    api_key = "14QZBS4UY6VJ5G1J9MT4RCP9KG8YGFBCX9"
+    a = GetPreSale(api_key)
+    address = "0x18e4b20Bcd2C0A000D5e36Ed2df14eDc7917bEfA"
+    abi = a.get_contract_abi(address)
     print(abi)
 
 main()

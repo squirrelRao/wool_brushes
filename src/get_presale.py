@@ -57,7 +57,7 @@ class GetPreSale:
 
 
 def main():
-    api_key = "14QZBS4UY6VJ5G1J9MT4RCP9KG8YGFBCX9"
+    api_key = ""
     a = GetPreSale(api_key)
     address = "0x18e4b20Bcd2C0A000D5e36Ed2df14eDc7917bEfA"
     abi = a.get_contract_abi(address)

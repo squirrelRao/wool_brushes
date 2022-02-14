@@ -12,7 +12,7 @@ class GetPreSale:
     def __init__(self,bsc_key):
         self.provider = 'https://data-seed-prebsc-1-s1.binance.org:8545'
         self.bsc_api_key = bsc_key
-        self.bsc_api_key = '14QZBS4UY6VJ5G1J9MT4RCP9KG8YGFBCX9'
+        self.bsc_api_key = ''
         self.contract_address = ''
         self.abi = ''
 
